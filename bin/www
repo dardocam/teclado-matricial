@@ -8,8 +8,8 @@ var app = require("../app");
 var debug = require("debug")("matricial-keyboard:server");
 var http = require("http");
 
-const { createServer } = require("node:http");
-const { join } = require("node:path");
+// const { createServer } = require("node:http");
+// const { join } = require("node:path");
 const { Server } = require("socket.io");
 const { SerialPort } = require("serialport");
 const fs = require("fs");
@@ -31,6 +31,10 @@ var server = http.createServer(app);
  * Create SOCKET io.
  */
 const io = new Server(server);
+io.on("connection", (socket) => {
+  console.log("a user connected");
+});
+
 /**
  * Create SERIALPORT conection.
  */
@@ -41,6 +45,7 @@ fs.access(portName, fs.constants.F_OK, (err) => {
     console.log("El puerto " + portName + " no existe.");
     io.on("connection", (socket) => {
       console.log("a user connected");
+      console.log(socket);
       io.emit("arduino:data", {
         //value: data.toString()
         value: "el puerto no existe",
@@ -49,7 +54,7 @@ fs.access(portName, fs.constants.F_OK, (err) => {
   } else {
     console.log("El puerto " + portName + " existe.");
     //config
-    const sPort = new SerialPort({
+    var sPort = new SerialPort({
       path: portName,
       baudRate: 9600,
     });
@@ -63,6 +68,12 @@ fs.access(portName, fs.constants.F_OK, (err) => {
     });
     sPort.on("err", function (data) {
       console.log(err.message);
+    });
+    io.on("connection", (socket) => {
+      socket.on("complete", () => {
+        sPort.write("c");
+        console.log("complete");
+      });
     });
   }
 });
