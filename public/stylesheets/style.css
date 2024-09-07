@@ -15,13 +15,148 @@ a {
 
 p {
   font-size: 50px;
+  padding: 30px;
 }
-
+img {
+  opacity: 0.8;
+  margin-top: 20px;
+  border-radius: 50px;
+}
 .container {
   width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: red;
+  background-color: rgba(27, 129, 49, 0.8);
   padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  border-radius: 30px;
+  margin-top: 50px;
+  padding: 20px;
+  height: 50%;
+  border: 8px solid white;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  overflow: hidden;
+}
+
+.fondo-animado {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #ff9a9e);
+  background-size: 300% 300%;
+  animation: animarFondo 10s ease infinite;
+}
+
+@keyframes animarFondo {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Fondo con colores aleatorios */
+@keyframes cambiarColores {
+  0% {
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+  }
+  25% {
+    background: linear-gradient(45deg, #a18cd1, #fbc2eb);
+  }
+  50% {
+    background: linear-gradient(45deg, #fad0c4, #ffd1ff);
+  }
+  75% {
+    background: linear-gradient(45deg, #ffecd2, #fcb69f);
+  }
+  100% {
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+  }
+}
+
+.fondo-animado {
+  animation: cambiarColores 15s infinite ease-in-out;
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out infinite;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  75% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.simple-celebration {
+  padding: 20px;
+  background-color: #ff6347; /* Color alegre (rojo tomate) */
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 10px;
+  text-align: center;
+  animation: bounce-celebration 1.5s ease-in-out infinite;
+}
+
+@keyframes bounce-celebration {
+  0%,
+  100% {
+    transform: scale(1);
+    background-color: #ff6347;
+  }
+  50% {
+    transform: scale(1.2); /* Aumenta de tamaño para el efecto de rebote */
+    background-color: #ffd700; /* Cambia a color dorado */
+  }
 }
